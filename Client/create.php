@@ -8,7 +8,7 @@
     $client = json_decode($json);
 
 
-    $sql = "INSERT INTO client (nom, pseudo, password, telephone, DateNaissance, pays, ville, statut) VALUES ('$client->nom', '$client->pseudo', '$client->password', '$client->telephone', '$client->DateNaissance', '$client->pays', '$client->vile', '$client->statut')"; 
+    $sql = "INSERT INTO client (nom, pseudo, password, telephone, DateNaissance, pays, ville) VALUES ('$client->nom', '$client->pseudo', '$client->password', '$client->telephone', '$client->DateNaissance', '$client->pays', '$client->vile')"; 
 
     $result = mysqli_query($conn, $sql);
 
