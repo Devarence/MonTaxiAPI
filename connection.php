@@ -1,17 +1,25 @@
 <?php 
+    Class Connection{
+        /* Database connection start */
+        var $host = "localhost";
+        var $username = "root";
+        var $password = "";
+        var $dbname = "montaxi";
+        var $conn;
+       
+        public function getConnection() {
 
-    $dbhost = 'localhost';
+            $this->conn = null;
+            try{
+                $this->conn = new PDO("mysql:host=" . $this->host . ";dbname=" . $this->dbname, $this->username, $this->password);
+                $this->conn->exec("set names utf8");
+            }
+            catch(PDOException $exception){
+                echo "La connexion a échoué:" . $exception->getMessage();
+            } 
 
-    $dbuser = 'root';
-
-    $dbpass = '';
-            
-    $conn = mysqli_connect($dbhost, $dbuser, $dbpass, 'montaxi');
-
-    if (mysqli_connect_errno())
-	 {
-	 	echo "Failed to connect to MySQL: " . mysqli_connect_error();
-	 }
-	 
+            return $this->conn;
+        }
+    }
 ?>
 
