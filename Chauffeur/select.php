@@ -4,9 +4,9 @@
 header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json; charset=UTF-8");
   
-include ('../connection.php');
-include ('../entities/chauffeur.php');
-include ('../response.php');
+include('../connection.php');
+include('../entities/chauffeur.php');
+include('../response.php');
 
 // instantiate database and product object
 $connection = new Connection();
@@ -25,13 +25,13 @@ if($num>0){
     //tableau crée afficher tout les resultats trouvés
     $chauffeur_arr = array();// $req=array();
   
-    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)){
+    /*while ($row = $stmt->fetch(PDO::FETCH_ASSOC)){
           // extract row
         // this will make $row['name'] to
         // just $name only
         extract($row);
        
-        /*$chauffeur_item=array(
+        $chauffeur_item=array(
             "id" => $ID,
             "nom" => $Nom,
             "telephone" => $Telephone,
@@ -45,7 +45,7 @@ if($num>0){
        //inserer une ou plusieurs valeurs à la fin du tableau
            array_push($chauffeur_arr, $rooi);                               
          }
-    }
+    //}
     response(1, "selection effectuee", $chauffeur_arr);
 }
   else

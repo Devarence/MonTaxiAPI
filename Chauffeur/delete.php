@@ -1,21 +1,42 @@
 <?php
+
+    // required headers
+    header("Access-Control-Allow-Origin: *");
+    header("Content-Type: application/json; charset=UTF-8");
+    header("Access-Control-Allow-Methods: POST");
+    header("Access-Control-Max-Age: 3600");
+    header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
+
 	include('../connection.php');
 	include('../response.php');
-	include('../class.php');
+    include('../entities/chauffeur.php');
+    
+    // instantiate database and product object
+    $connection = new Connection();
+    $db = $connection->getConnection();
 
-	$ID=$_GET['id'];
+    // initialize object
+    $chauffeur = new Chauffeur($db);
+    
+    //recuperation des données et du id
+    $json = $_GET['json'];
+    $chauffeur_json = json_decode($json);
 
-    $sql= "DELETE FROM chauffeur WHERE ID=$ID";
+    //affectation de l'id renvoyé par la selection et le json
+   $chauffeur->ID = $chauffeur_json->id;
 
-    $result=mysqli_query($conn,$sql);
+    //$sql= "DELETE FROM chauffeur WHERE ID=$ID";
 
-    if($result==true)
-    {
-    	response(1, "Suppression effectuée", NULL);
+    // delete the product
+    if($chauffeur->delete()){
+       
+        response(1, "chauffeur supprimee", NULL);
     }
-    else
-    {
-    	response(0, "Erreur survenue pendant la suppression", NULL);
+ 
+    // if unable to create the product, tell the user
+    else{
+
+        response(0, "Erreur survenue pendant la suppression", NULL);
     }
 
     mysqli_close($conn);

@@ -1,26 +1,49 @@
 
  <?php
+
+   // required headers
+    header("Access-Control-Allow-Origin: *");
+    header("Content-Type: application/json; charset=UTF-8");
+    header("Access-Control-Allow-Methods: POST");
+    header("Access-Control-Max-Age: 3600");
+    header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
+ 
 	include('../connection.php');
 	include('../response.php');
-	include('../class.php');
+    include('../entities/chauffeur.php');
+    
+    // instantiate database and product object
+    $connection = new Connection();
+    $db = $connection->getConnection();
 
-	 $json= $_GET['json'];
-    $chauffeur = json_decode($json);
+    // initialize object
+    $chauffeur = new Chauffeur($db);
 
+	 $json = $_GET['json'];
+    $chauffeur_json = json_decode($json);
 
-    $sql= "UPDATE chauffeur SET (nom='$chauffeur->nom', telephone = '$chauffeur->telephone', DateNaissance = '$chauffeur->DateNaissance' , employeur = '$chauffeur->employeur', nationalite = '$chauffeur->nationalite')  
-    WHERE ID='$chauffeur->id'";
+    //affectation de l'id renvoyé par la selection et le json
+   $chauffeur->ID = $chauffeur_json->id;
 
-    $result=mysqli_query($conn,$sql);
+   //affectation des valeurs
+   $chauffeur->Nom = $chauffeur_json->nom;
+   $chauffeur->Telephone = $chauffeur_json->telephone;
+   $chauffeur->DateNaissance = $chauffeur_json->datenaissance;
+   $chauffeur->Employeur = $chauffeur_json->employeur;
+   $chauffeur->Nationalite = $chauffeur_json->nationalite;
 
-    if($result==true)
-    {
-    	response(1, "Modification effectuee",NULL);
+     // update the product
+     if($chauffeur->update()){
+       
+        response(1, "Modification effectuee", NULL);
     }
-    else
-    {
-    	response(0, "Erreur survenue pendant la modification", NULL);
+ 
+    // if unable to create the product, tell the user
+    else{
+
+        response(0, "Erreur survenue pendant l'insertion", NULL);
     }
+   
 
     mysqli_close($conn);
 ?>

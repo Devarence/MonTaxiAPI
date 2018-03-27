@@ -1,31 +1,44 @@
 <?php
 
-  include('../connection.php');
-  include('../response.php');
-  include('../class.php');
+header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Headers: access");
+header("Access-Control-Allow-Methods: GET");
+header("Access-Control-Allow-Credentials: true");
+header('Content-Type: application/json');
 
-   $jsonData = $_GET['json'];
+include('../connection.php');
+include('../response.php');
+include('../entities/chauffeur.php');
 
-   $chauffeur= json_decode($jsonData);
+// instantiate database and product object
+$connection = new Connection();
+$db = $connection->getConnection();
+
+// initialize object
+$chauffeur = new Chauffeur($db);
+
+   $json= $_GET['json'];
+   $chauffeur_json= json_decode($json);
+
+   //affectation de l'id renvoyé par la selection et le json
+   $chauffeur->ID = $chauffeur_json->id;
+
+   // read the details of chauffeur to be edited
+  $chauffeur->readOne();
+  //creation d'un tableau
+  $chauffeur_arr = array();
   
-    $sql= "SELECT  chauffeur.*, taxi.immatriculation AS immatriculation, taxi.tarification as prix, taxi.ModePaiement as modepaiement
-    FROM chauffeur
-    JOIN taxi ON taxi.ChauffeurID = Chauffeur.ID";
-
-
-    $result=mysqli_query($conn,$sql);
-
      //tableau crée afficher tout les resultats trouvés
 
-    foreach($result as $rooi) 
+    foreach($stmt as $rooi) 
         {
       //inserer une ou plusieurs valeurs à la fin du tableau
-          $req=$rooi;                            
+          $chauffeur_arr=$rooi;                            
         }
 
-    if($result==true)
+    if($stmt==true)
     {
-      response(1, "Recherche trouvee", $req);
+      response(1, "Recherche trouvee", $chauffeur_arr);
     }
     else
     {
