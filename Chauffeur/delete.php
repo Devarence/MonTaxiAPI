@@ -39,5 +39,5 @@
         response(0, "Erreur survenue pendant la suppression", NULL);
     }
 
-    mysqli_close($conn);
+    $db = NULL;
 ?>

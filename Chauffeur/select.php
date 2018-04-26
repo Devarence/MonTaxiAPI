@@ -55,6 +55,6 @@ if($num>0){
 
      }
 
-     mysqli_close($connection);
+     $db = NULL;
 
 ?>

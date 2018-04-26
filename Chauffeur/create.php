@@ -46,7 +46,7 @@
         response(0, "Erreur survenue pendant l'insertion", NULL);
     }
    
-    mysqli_close($conn);
+    $db = NULL;
 
 ?>
                 

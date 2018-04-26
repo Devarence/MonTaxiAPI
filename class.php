@@ -6,15 +6,15 @@
   	var $ID;
   	var $Nom;
   	var $Telephone;
-		var $DateNaissance;
-		var $Employeur;
-		var $Nationalite;
+	var $DateNaissance;
+	var $Employeur;
+	var $Nationalite;
   }
 
  class Client
    {
-		var $ID;
-		var $PositionID;
+	var $ID;
+	var $PositionID;
    	var $Nom;
    	var $Pseudo;
     var $Password;
@@ -31,17 +31,17 @@
   	var $TaxiID;
   	var $Depart;
   	var $Arrivee;
-		var $DateHeure;
-		var $NombrePersonne;
-		var $Montant;//si le client n'a pas de compte alors il renseigne lui mem ce champs sinon 
+	var $DateHeure;
+	var $NombrePersonne;
+	var $Montant;//si le client n'a pas de compte alors il renseigne lui meme ce champs sinon 
 								//ce champ est fait auto fr/km
   	var $Arrangement;
-		var $Modepaiement;
-		var $lat;
-		var $lng;
-		var $type;
+	var $Modepaiement;
+	var $lat;
+	var $lng;
+	var $type;
   	var $Statut;//si la commande a été effectué ou en cours
-	}
+ }
 
   class Taxi
  {
@@ -55,12 +55,12 @@
 	var $note;//sera automatique
  }
 
- class Position
- {
+ 	class Position
+ 	{
 	 var $ID;
 	 var $Latitude;
 	 var $Longitude;
 	 var $Type;
- }
+ 	}
 
 ?>

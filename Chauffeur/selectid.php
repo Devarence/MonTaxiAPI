@@ -45,6 +45,6 @@ $chauffeur = new Chauffeur($db);
       response(0, "Erreur survenue pendant la recherche", NULL);
     }
 
-    mysqli_close($conn);
+    $db = NULL;
 
 ?>
